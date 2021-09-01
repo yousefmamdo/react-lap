@@ -1,31 +1,30 @@
-import React from 'react'
-import { Row ,Container,Col } from 'react-bootstrap';
-import HornedBeasts from './HornedBeasts';
+import React from "react";
+import HornedBeasts from "./HornedBeasts";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Row from "react-bootstrap/Row";
 
-class Main extends React.Component{
-colHeight =React.createRef();
-state ={coloneHeight:0};
-_key=[];
-
-    render(){
-        return(
-        <div id="beast-container">
-            <Row xs={1} md={3} className="g-4">
-                {this.props.rowData.map((item ,idx)=>{
-                    return(
-                        <HornedBeasts
-                        title={item.title}
-                        src={item.image_url}
-                        description={this.props.description}
-                        showModal={this.props.showModal}
-                        updateSelectedBeastData={this.props.updateSelectedBeastData}
-                        />
-                    )
-                })}
-            </Row>
-        </div>
-        )
-    }
-
+class Main extends React.Component {
+  render() {
+    return (
+      <main>
+        <Row xs={1} md={3} className="g-4">
+          {this.props.data.map((item) => {
+            return (
+              <HornedBeasts
+                title={item.title}
+                imgSrc={item.image_url}
+                description={item.description}
+                horns={item.horns} 
+                show={this.props.show}
+                updateBeast={this.props.updateBeast}
+                
+              />
+            );
+          })}
+        </Row>
+      </main>
+    );
+  }
 }
+
 export default Main;
