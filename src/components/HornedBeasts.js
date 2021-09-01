@@ -1,7 +1,8 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import  Card  from 'react-bootstrap/Card';
-import  Button  from 'react-bootstrap/Button';
+
+import Col from 'react-bootstrap/Col'
 
 
 class HornedBeasts extends React.Component{
@@ -14,23 +15,29 @@ constructor(props){
 addNumberOfPets= ()=> {
 this.setState({
     numberOfPets : this.state.numberOfPets +1
-})
+});
+//this.props.showModel();
+this.props.updateSelectedBeastData (this.props.title,this.props.src,this.props.description)
 }
     render(){
         return(
             <>
-
-<Card style={{ width: '18rem' }}>
-  <Card.Img variant="top" src={this.props.imageUrl} onClick={this.addNumberOfPets} />
+ <Col>
+<Card style={{ width: '18rem' }}
+bg="dark"
+text="light"
+onClick={this.addNumberOfPets}>
+  <Card.Img variant="top" src={this.props.src}  />
   <Card.Body>
     <Card.Title>{this.props.title}</Card.Title>
     <Card.Text>
     {this.props.description}
     <p>Number of pets❤️:{this.state.numberOfPets}</p>
     </Card.Text>
-    <Button variant="primary">Go somewhere</Button>
+  
   </Card.Body>
 </Card>
+</Col>
             </>
         )
     }
