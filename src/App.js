@@ -2,32 +2,31 @@ import React from 'react';
 import Main from './components/Main';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import dataJson from './data.json';
+import dataRow from './data.json';
+import Form from './components/Formes';
 import SelectedBeast from './components/SelectedBeast';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: dataJson,
+      data: dataRow,
       show: false,
       title: "",
       description: "",
       imgSrc: "",
-      horns:"",
+      horns:0,
+      
     };
   }
+  
 
-  show = (title) => {
-    const filterData = dataJson.filter((item) => {
-      if (title === item.title) {
-        console.log(item);
-        return item;
-      }
-    });
+  show = () => {
+    
     this.setState({
+      
       show: true,
-      data: filterData,
+      
     });
   };
 
@@ -39,7 +38,7 @@ class App extends React.Component {
       horns:horns,
     });
 
-    console.log(title);
+ 
   };
 
   close = () => {
@@ -48,12 +47,32 @@ class App extends React.Component {
     });
   };
 
+
+  newHandler = (event) => {
+    let newData;
+    if(event.target.value==='all'){
+      newData=dataRow;
+    }else{
+      newData = dataRow.filter(item => {
+      
+        return (item.horns === parseInt(event.target.value));
+  
+      })
+    }
+    
+    this.setState({
+      data: newData
+    })
+   
+  }
+
   render() {
     return (
       <div>
-        <Header />
+        <Header  />
+        <Form newHandler={this.newHandler} />
         <Main
-          data={dataJson}
+          data={this.state.data}
           show={this.show}
           updateBeast={this.updateBeast}
         />
